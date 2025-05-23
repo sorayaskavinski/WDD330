@@ -12,7 +12,7 @@ function renderCartContents() {
     productListEl.innerHTML = ''; 
   } else {
     emptyMessageEl.style.display = 'none'; 
-    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+    const htmlItems = cartItems.map(item => cartItemTemplate(item));
     productListEl.innerHTML = htmlItems.join('');
   }
 }
