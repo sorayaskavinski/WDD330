@@ -1,9 +1,20 @@
 import { getLocalStorage } from './utils.mjs';
 
 function renderCartContents() {
-  const cartItems  = getLocalStorage('so-cart');
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector('.product-list').innerHTML = htmlItems.join('');
+  const rawCart = getLocalStorage('so-cart');
+  const cartItems = Array.isArray(rawCart) ? rawCart : [];
+
+  const emptyMessageEl = document.querySelector('.empty-cart-message');
+  const productListEl = document.querySelector('.product-list');
+
+  if (cartItems.length === 0) {
+    emptyMessageEl.style.display = 'block'; 
+    productListEl.innerHTML = ''; 
+  } else {
+    emptyMessageEl.style.display = 'none'; 
+    const htmlItems = cartItems.map(item => cartItemTemplate(item));
+    productListEl.innerHTML = htmlItems.join('');
+  }
 }
 
 function cartItemTemplate(item) {
