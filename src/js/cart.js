@@ -65,5 +65,18 @@ function addRemoveItemListeners() {
   });
 }
 
+function updateCartCount() {
+  const cartItems = getLocalStorage('so-cart');
+  const countEl = document.querySelector('.cart-count');
+  const count = Array.isArray(cartItems) ? cartItems.length : 0;
+
+  if (count > 0) {
+    countEl.textContent = count;
+    countEl.classList.remove('hide');
+  } else {
+    countEl.classList.add('hide');
+  }
+}
 
 renderCartContents();
+updateCartCount();

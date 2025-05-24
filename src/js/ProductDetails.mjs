@@ -24,6 +24,12 @@ export default class ProductDetails {
     const cartItems = getLocalStorage('so-cart') || [];
     cartItems.push(this.product);
     setLocalStorage('so-cart', cartItems);
+
+    const countEl = document.querySelector('.cart-count');
+    if (countEl) {
+      countEl.textContent = getLocalStorage('so-cart').length;
+      countEl.classList.remove('hide');
+    }
   }
 
   renderProductDetails() {
